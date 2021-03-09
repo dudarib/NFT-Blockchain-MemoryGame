@@ -53,7 +53,19 @@ contract('Memory Token', (accounts) => {
       assert.equal(result.toString(), accounts[0].toString(), 'owner is correct')
       result = await token.tokenOfOwnerByIndex(accounts[0], 0)
 
+      // owner can see all tokens
+      let balanceOf = await token.balanceOf(accounts[0])
+      let tokenIds = []
+      for (let i = 0; i < balanceOf; i++) {
+        let id = await token.tokenOfOwnerByIndex(accounts[0], i)
+        tokenIds.push(id.toString())
+      }
+      let expected = ['1']
+      assert.equal(tokenIds.toString(), expected.toString(), 'tokenIds are correct')
 
+      // Token URI
+      let tokenURI = await token.tokenURI('1')
+      assert.equal(tokenURI, 'https://www.token-721.com')
     })
   })
 })
