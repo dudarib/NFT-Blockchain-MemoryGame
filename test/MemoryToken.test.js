@@ -66,6 +66,7 @@ contract('Memory Token', (accounts) => {
       // Token URI
       let tokenURI = await token.tokenURI('1')
       assert.equal(tokenURI, 'https://www.token-721.com')
+
     })
   })
 })
